@@ -564,6 +564,10 @@
             flex-direction: column;
             gap: 0.6rem;
             margin: 0.5rem 0 1rem 0;
+            user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -moz-user-select: none;
         }
 
         .processo-item {
@@ -580,6 +584,10 @@
             color: #d4cce8;
             position: relative;
             overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -moz-user-select: none;
         }
 
         .processo-item::before {
@@ -616,6 +624,8 @@
             font-size: 0.95rem;
             box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
             flex-shrink: 0;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         /* Serviços */
@@ -624,6 +634,10 @@
             grid-template-columns: 1fr;
             gap: 1.2rem;
             margin: 1.2rem 0;
+            user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -moz-user-select: none;
         }
 
         .servico-item {
@@ -638,6 +652,10 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             position: relative;
             overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -moz-user-select: none;
         }
 
         .servico-item::before {
@@ -1361,36 +1379,22 @@
         document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
         // ============================================================
-        // 4. TYPING EFFECT NA FRASE DE BAIXO
+        // 4. TYPING EFFECT - APENAS DIGITA UMA VEZ (SEM APAGAR)
         // ============================================================
         (function typingEffect() {
             const pElement = document.getElementById('typing-text');
             const originalText = 'Landing pages e sites institucionais rápidos, modernos e responsivos.';
             let currentIndex = 0;
-            let isDeleting = false;
             let speed = 55;
 
             function type() {
-                if (!isDeleting) {
-                    if (currentIndex < originalText.length) {
-                        pElement.innerHTML = originalText.substring(0, currentIndex + 1) + '<span class="typing-cursor"></span>';
-                        currentIndex++;
-                        setTimeout(type, speed);
-                    } else {
-                        setTimeout(() => {
-                            isDeleting = true;
-                            setTimeout(type, 2000);
-                        }, 3000);
-                    }
+                if (currentIndex < originalText.length) {
+                    pElement.innerHTML = originalText.substring(0, currentIndex + 1) + '<span class="typing-cursor"></span>';
+                    currentIndex++;
+                    setTimeout(type, speed);
                 } else {
-                    if (currentIndex > 0) {
-                        pElement.innerHTML = originalText.substring(0, currentIndex - 1) + '<span class="typing-cursor"></span>';
-                        currentIndex--;
-                        setTimeout(type, speed / 2);
-                    } else {
-                        isDeleting = false;
-                        setTimeout(type, 500);
-                    }
+                    // Remove o cursor após terminar a digitação
+                    pElement.innerHTML = originalText;
                 }
             }
 
@@ -1534,11 +1538,12 @@
 
         console.log('🚀 SITE SURREAL ATIVADO!');
         console.log('⭐ Partículas interativas');
-        console.log('⭐ Typing effect na frase secundária');
+        console.log('⭐ Typing effect (apenas digita, não apaga)');
         console.log('⭐ Parallax 3D nos cards');
         console.log('⭐ Scroll forçado para o topo ao recarregar');
         console.log('⭐ Zoom bloqueado no mobile');
         console.log('⭐ Scroll horizontal bloqueado');
+        console.log('⭐ Seleção de texto desabilitada em Serviços e Processo');
     </script>
 </body>
 </html>
