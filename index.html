@@ -7,7 +7,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -23,10 +23,77 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #0b0815;
+            background: #07050e;
             color: #e8e2f0;
             line-height: 1.6;
             padding: 0 0 2rem 0;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #07050e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            border-radius: 10px;
+        }
+
+        /* Animações */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 20px rgba(124, 58, 237, 0);
+            }
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .container {
@@ -41,14 +108,14 @@
         h3,
         h4 {
             font-family: 'Outfit', sans-serif;
-            font-weight: 700;
-            letter-spacing: -0.02em;
+            font-weight: 800;
+            letter-spacing: -0.03em;
         }
 
         h2 {
-            font-size: 2rem;
+            font-size: 2.4rem;
             margin-bottom: 0.2rem;
-            margin-top: 2.8rem;
+            margin-top: 3rem;
             position: relative;
             display: inline-block;
             color: #f0ebff;
@@ -58,40 +125,51 @@
             content: '';
             position: absolute;
             left: 0;
-            bottom: -6px;
-            width: 48px;
+            bottom: -8px;
+            width: 60px;
             height: 4px;
-            background: linear-gradient(90deg, #a78bfa, #7c3aed);
+            background: linear-gradient(90deg, #a78bfa, #7c3aed, #6d28d9);
             border-radius: 4px;
         }
 
         .section-sub {
             color: #a89bc2;
-            margin-bottom: 1.8rem;
+            margin-bottom: 2rem;
             font-weight: 400;
             padding-left: 0;
-            margin-top: 0.5rem;
+            margin-top: 0.8rem;
+            font-size: 1.1rem;
         }
 
-        /* Cards com fundo escuro e bordas sutis */
+        /* Cards com glassmorphism */
         .card {
-            background: #15111f;
+            background: rgba(21, 17, 31, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 28px;
             padding: 2rem 1.8rem;
-            border: 1px solid #2a2340;
-            transition: 0.25s ease;
+            border: 1px solid rgba(42, 35, 64, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             margin-bottom: 1.8rem;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
 
-        .card-soft {
-            background: #1a1528;
-            border: 1px solid #332b4a;
+        .card:hover {
+            border-color: rgba(124, 58, 237, 0.3);
+            box-shadow: 0 12px 48px rgba(124, 58, 237, 0.08);
+            transform: translateY(-2px);
         }
 
-        /* Botões principais - mesma base, mesmas dimensões */
+        .card-soft {
+            background: rgba(26, 21, 40, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(51, 43, 74, 0.5);
+        }
+
+        /* Botões principais */
         .btn-primary {
-            padding: 0.85rem 2rem;
+            padding: 0.9rem 2.2rem;
             border-radius: 60px;
             font-weight: 700;
             font-size: 1rem;
@@ -100,7 +178,7 @@
             justify-content: center;
             gap: 10px;
             text-decoration: none;
-            transition: 0.25s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             letter-spacing: -0.01em;
             border: 2px solid transparent;
             width: 100%;
@@ -108,61 +186,107 @@
             text-align: center;
             line-height: 1.4;
             box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-primary i {
             font-size: 1.1rem;
         }
 
-        /* Botão orçamento - roxo escuro sólido */
         .btn-orcamento {
-            background: linear-gradient(135deg, #3d2d5e, #281d42);
-            color: #e8e2f0;
-            border-color: #4a3a6b;
-            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.12);
+            background: linear-gradient(135deg, #7c3aed, #6d28d9, #5b21b6);
+            color: #ffffff;
+            border-color: rgba(124, 58, 237, 0.3);
+            box-shadow: 0 4px 30px rgba(124, 58, 237, 0.25);
+        }
+
+        .btn-orcamento::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #a78bfa, #7c3aed, #6d28d9, #7c3aed);
+            background-size: 300% 300%;
+            border-radius: 60px;
+            z-index: -1;
+            animation: gradientMove 4s ease infinite;
         }
 
         .btn-orcamento:hover {
-            transform: translateY(-3px) scale(1.02);
-            background: linear-gradient(135deg, #4a3a6b, #32234f);
-            border-color: #7c3aed;
-            box-shadow: 0 8px 28px rgba(124, 58, 237, 0.25);
-            color: #f0ebff;
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 40px rgba(124, 58, 237, 0.4);
         }
 
-        /* Botão projetos - outline com mesma largura */
         .btn-projetos {
             background: transparent;
             color: #d4cce8;
-            border-color: #4a3d66;
+            border-color: rgba(124, 58, 237, 0.4);
+            position: relative;
+        }
+
+        .btn-projetos::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 60px;
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .btn-projetos:hover {
-            background: #7c3aed;
             color: white;
-            border-color: #7c3aed;
-            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+            border-color: transparent;
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 40px rgba(124, 58, 237, 0.2);
+        }
+
+        .btn-projetos:hover::after {
+            opacity: 1;
         }
 
         /* Hero */
         .hero {
-            padding: 2rem 0 1rem 0;
+            padding: 1.5rem 0 1rem 0;
             text-align: center;
             position: relative;
         }
 
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.06) 0%, transparent 70%);
+            animation: fadeIn 2s ease;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
         .hero-avatar {
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             border-radius: 999px;
-            margin: 0 auto 1rem auto;
+            margin: 0 auto 0.8rem auto;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            box-shadow: 0 16px 48px rgba(124, 58, 237, 0.2);
-            border: 3px solid #3a2a5a;
-            background: #2d1f4a;
+            box-shadow: 0 20px 60px rgba(124, 58, 237, 0.25);
+            border: 3px solid rgba(124, 58, 237, 0.3);
+            background: rgba(45, 31, 74, 0.5);
+            backdrop-filter: blur(10px);
         }
 
         .hero-avatar img {
@@ -173,23 +297,23 @@
         }
 
         .hero h1 {
-            font-size: 1.8rem;
-            line-height: 1.2;
+            font-size: 3rem;
+            line-height: 1.1;
             margin-bottom: 0.3rem;
-            background: linear-gradient(135deg, #e8e0ff, #b8a0e8);
+            background: linear-gradient(135deg, #f0ebff, #c4b5e6, #a78bfa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            max-width: 600px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .hero p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: #b0a4cc;
             max-width: 500px;
-            margin: 0 auto 0.4rem auto;
+            margin: 0 auto 0.2rem auto;
             font-weight: 400;
         }
 
@@ -198,32 +322,55 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 0.8rem;
-            margin-top: 1rem;
+            gap: 0.7rem;
+            margin-top: 1.2rem;
             width: 100%;
         }
 
-        /* Projetos - melhorado para web */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(124, 58, 237, 0.15);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            padding: 0.4rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            color: #a78bfa;
+            margin-bottom: 1rem;
+        }
+
+        .status-badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #34d399;
+            animation: pulse 2s infinite;
+        }
+
+        /* Projetos */
         .projetos-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 1.8rem;
-            margin: 1.8rem 0;
+            margin: 1.5rem 0;
         }
 
         .projeto-card {
-            background: #15111f;
+            background: rgba(21, 17, 31, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 28px;
             padding: 1.6rem 1.5rem 1.8rem;
-            border: 1px solid #2a2340;
-            transition: 0.25s ease;
+            border: 1px solid rgba(42, 35, 64, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
         }
 
         .projeto-card:hover {
-            transform: translateY(-6px);
-            border-color: #5a4680;
-            box-shadow: 0 16px 48px rgba(124, 58, 237, 0.12);
+            transform: translateY(-8px);
+            border-color: rgba(124, 58, 237, 0.4);
+            box-shadow: 0 20px 60px rgba(124, 58, 237, 0.1);
         }
 
         .projeto-card .thumb {
@@ -232,8 +379,13 @@
             border-radius: 20px;
             margin-bottom: 1rem;
             overflow: hidden;
-            border: 1px solid #332b4a;
-            background: #1a142b;
+            border: 1px solid rgba(51, 43, 74, 0.5);
+            background: rgba(26, 20, 43, 0.5);
+            transition: transform 0.4s ease;
+        }
+
+        .projeto-card:hover .thumb {
+            transform: scale(1.02);
         }
 
         .projeto-card .thumb img {
@@ -256,7 +408,6 @@
             margin-bottom: 0.8rem;
         }
 
-        /* Botão "Ver projeto" padrão - mesmo estilo dos botões principais */
         .btn-ver-projeto {
             padding: 0.6rem 1.8rem;
             border-radius: 60px;
@@ -266,8 +417,8 @@
             align-items: center;
             gap: 8px;
             text-decoration: none;
-            transition: 0.25s;
-            border: 2px solid #4a3d66;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid rgba(74, 61, 102, 0.6);
             color: #d4cce8;
             background: transparent;
             min-width: 140px;
@@ -294,18 +445,20 @@
             display: flex;
             align-items: center;
             gap: 1.2rem;
-            background: #15111f;
+            background: rgba(21, 17, 31, 0.7);
+            backdrop-filter: blur(10px);
             padding: 0.8rem 1.6rem;
             border-radius: 60px;
-            border: 1px solid #2a2340;
-            transition: 0.15s;
+            border: 1px solid rgba(42, 35, 64, 0.5);
+            transition: all 0.3s ease;
             font-weight: 500;
             color: #d4cce8;
         }
 
         .processo-item:hover {
-            border-color: #5a4680;
-            background: #1a1528;
+            border-color: rgba(124, 58, 237, 0.3);
+            transform: translateX(6px);
+            background: rgba(26, 21, 40, 0.8);
         }
 
         .processo-num {
@@ -320,6 +473,7 @@
             font-weight: 700;
             font-size: 0.95rem;
             box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+            flex-shrink: 0;
         }
 
         /* Serviços */
@@ -331,19 +485,21 @@
         }
 
         .servico-item {
-            background: #15111f;
+            background: rgba(21, 17, 31, 0.7);
+            backdrop-filter: blur(10px);
             padding: 1.4rem 1.8rem;
             border-radius: 24px;
             border-left: 6px solid #7c3aed;
-            border: 1px solid #2a2340;
+            border: 1px solid rgba(42, 35, 64, 0.5);
             border-left-width: 6px;
-            transition: 0.15s;
+            transition: all 0.3s ease;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .servico-item:hover {
             border-left-color: #a78bfa;
-            background: #1a1528;
+            background: rgba(26, 21, 40, 0.8);
+            transform: translateX(4px);
         }
 
         .servico-item h4 {
@@ -356,10 +512,10 @@
             color: #a89bc2;
         }
 
-        /* Diferenciais - com MUITO espaçamento */
+        /* Diferenciais */
         .diferenciais-wrapper {
-            margin-top: 2rem;
-            margin-bottom: 2.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .diferenciais-grid {
@@ -370,23 +526,27 @@
         }
 
         .diferencial-item {
-            background: #15111f;
-            border: 1px solid #2a2340;
+            background: rgba(21, 17, 31, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(42, 35, 64, 0.5);
             border-radius: 20px;
             padding: 1.2rem 0.8rem;
             text-align: center;
-            transition: 0.25s ease;
+            transition: all 0.3s ease;
         }
 
         .diferencial-item:hover {
-            border-color: #7c3aed;
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.1);
+            border-color: rgba(124, 58, 237, 0.4);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(124, 58, 237, 0.08);
         }
 
         .diferencial-item i {
-            font-size: 1.8rem;
-            color: #a78bfa;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 0.5rem;
             display: block;
         }
@@ -400,8 +560,8 @@
 
         /* Por que ter um site? */
         .porque-wrapper {
-            margin-top: 2rem;
-            margin-bottom: 2.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .porque-grid {
@@ -411,22 +571,26 @@
         }
 
         .porque-item {
-            background: #15111f;
-            border: 1px solid #2a2340;
+            background: rgba(21, 17, 31, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(42, 35, 64, 0.5);
             border-radius: 20px;
             padding: 1.5rem 1.2rem;
-            transition: 0.25s ease;
+            transition: all 0.3s ease;
         }
 
         .porque-item:hover {
-            border-color: #7c3aed;
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.1);
+            border-color: rgba(124, 58, 237, 0.4);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(124, 58, 237, 0.08);
         }
 
         .porque-item i {
-            font-size: 1.8rem;
-            color: #a78bfa;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 0.5rem;
             display: block;
         }
@@ -443,7 +607,7 @@
             line-height: 1.5;
         }
 
-        /* Depoimentos - melhorado para web */
+        /* Depoimentos */
         .depoimentos-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -452,17 +616,19 @@
         }
 
         .depoimento-item {
-            background: linear-gradient(145deg, #1a1528, #15111f);
+            background: rgba(21, 17, 31, 0.7);
+            backdrop-filter: blur(20px);
             padding: 1.8rem 1.8rem;
             border-radius: 24px;
-            border: 1px solid #332b4a;
+            border: 1px solid rgba(51, 43, 74, 0.5);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-            transition: 0.25s ease;
+            transition: all 0.3s ease;
         }
 
         .depoimento-item:hover {
-            border-color: #7c3aed;
-            transform: translateY(-3px);
+            border-color: rgba(124, 58, 237, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(124, 58, 237, 0.08);
         }
 
         .depoimento-item .estrelas {
@@ -493,9 +659,9 @@
             font-size: 0.9rem;
         }
 
-        /* Contato - com espaçamento */
+        /* Contato */
         .contato-wrapper {
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             margin-bottom: 1.5rem;
         }
 
@@ -510,8 +676,9 @@
         .contato-redes a {
             color: #b0a4cc;
             font-size: 1.6rem;
-            transition: 0.25s;
-            background: #1a1528;
+            transition: all 0.3s ease;
+            background: rgba(26, 21, 40, 0.7);
+            backdrop-filter: blur(10px);
             width: 56px;
             height: 56px;
             border-radius: 99px;
@@ -519,36 +686,35 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            border: 1px solid #332b4a;
+            border: 1px solid rgba(51, 43, 74, 0.5);
         }
 
         .contato-redes a:hover {
             color: white;
-            background: #7c3aed;
+            background: rgba(124, 58, 237, 0.3);
             border-color: #7c3aed;
-            transform: scale(1.08);
-            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.25);
+            transform: scale(1.1) translateY(-4px);
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.2);
         }
 
         .footer-meta {
-            margin-top: 3.5rem;
+            margin-top: 3rem;
             text-align: center;
             color: #6a5d82;
             font-size: 0.9rem;
-            border-top: 1px solid #2a2340;
+            border-top: 1px solid rgba(42, 35, 64, 0.5);
             padding-top: 2rem;
         }
 
-        /* Avatar para a seção "Contato" */
         .avatar-medium {
             width: 72px;
             height: 72px;
             border-radius: 999px;
             overflow: hidden;
             flex-shrink: 0;
-            border: 2px solid #4a3a6b;
+            border: 2px solid rgba(74, 58, 107, 0.5);
             box-shadow: 0 4px 16px rgba(124, 58, 237, 0.12);
-            background: #2d1f4a;
+            background: rgba(45, 31, 74, 0.5);
         }
 
         .avatar-medium img {
@@ -558,7 +724,7 @@
             object-position: center 15%;
         }
 
-        /* Botão flutuante WhatsApp - estilo escuro/roxo */
+        /* WhatsApp Float */
         .whatsapp-float {
             position: fixed;
             bottom: 28px;
@@ -570,28 +736,27 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #3d2d5e, #281d42);
-            color: #e8e2f0;
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+            color: #fff;
             font-size: 2rem;
             text-decoration: none;
-            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
-            border: 2px solid #4a3a6b;
-            transition: 0.3s ease;
+            box-shadow: 0 4px 30px rgba(124, 58, 237, 0.4);
+            border: 2px solid rgba(124, 58, 237, 0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
         }
 
         .whatsapp-float:hover {
-            transform: scale(1.1);
-            background: linear-gradient(135deg, #4a3a6b, #32234f);
-            border-color: #7c3aed;
-            box-shadow: 0 8px 32px rgba(124, 58, 237, 0.5);
-            color: #f0ebff;
+            transform: scale(1.15) rotate(-5deg);
+            box-shadow: 0 8px 50px rgba(124, 58, 237, 0.5);
+            border-color: #a78bfa;
         }
 
         .whatsapp-float i {
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
 
-        /* responsivo */
+        /* Responsivo */
         @media (min-width: 640px) {
             .projetos-grid {
                 grid-template-columns: 1fr 1fr;
@@ -600,7 +765,7 @@
                 grid-template-columns: 1fr 1fr;
             }
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2.8rem;
             }
             .hero-buttons {
                 flex-direction: row;
@@ -619,10 +784,10 @@
                 gap: 1.8rem;
             }
             .hero h1 {
-                font-size: 2.6rem;
+                font-size: 3.6rem;
             }
             .depoimentos-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
                 gap: 1.8rem;
             }
             .depoimento-item {
@@ -653,6 +818,9 @@
             .porque-grid {
                 grid-template-columns: 1fr 1fr;
             }
+            .hero h1 {
+                font-size: 2rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -665,9 +833,8 @@
             .hero-buttons {
                 gap: 0.5rem;
             }
-            .avatar-medium {
-                width: 56px;
-                height: 56px;
+            .hero h1 {
+                font-size: 1.6rem;
             }
             .hero-avatar {
                 width: 100px;
@@ -694,10 +861,6 @@
             .diferencial-item span {
                 font-size: 0.75rem;
             }
-            .diferenciais-wrapper {
-                margin-top: 1rem;
-                margin-bottom: 1.5rem;
-            }
             .depoimentos-grid {
                 grid-template-columns: 1fr;
                 gap: 0.8rem;
@@ -708,9 +871,12 @@
             .depoimento-item .texto {
                 font-size: 0.85rem;
             }
-            .contato-wrapper {
-                margin-top: 1rem;
-                margin-bottom: 1rem;
+            .porque-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+            .porque-item {
+                padding: 1rem 1rem;
             }
             .whatsapp-float {
                 width: 50px;
@@ -719,46 +885,19 @@
                 bottom: 20px;
                 right: 20px;
             }
-            .porque-grid {
-                grid-template-columns: 1fr;
-                gap: 0.8rem;
-            }
-            .porque-item {
-                padding: 1rem 1rem;
-            }
-            .porque-item i {
-                font-size: 1.4rem;
-            }
-            .porque-item h4 {
-                font-size: 1rem;
-            }
-            .porque-item p {
-                font-size: 0.85rem;
-            }
-            .porque-wrapper {
-                margin-top: 1rem;
-                margin-bottom: 1.5rem;
+            h2 {
+                font-size: 1.8rem;
             }
         }
 
         .text-center {
             text-align: center;
         }
-        .mt-1 {
-            margin-top: 0.5rem;
-        }
-        .mb-1 {
-            margin-bottom: 0.5rem;
-        }
-        .mb-2 {
-            margin-bottom: 1.2rem;
-        }
 
         hr {
             border: 0;
-            border-top: 1px solid #2a2340;
-            margin: 2.2rem 0 0.5rem 0;
-            opacity: 0.6;
+            border-top: 1px solid rgba(42, 35, 64, 0.5);
+            margin: 2rem 0 0.5rem 0;
         }
     </style>
 </head>
@@ -767,23 +906,28 @@
 
         <!-- Hero -->
         <section class="hero">
-            <div class="hero-avatar">
-                <img src="vanley.png" alt="Vanley Basso">
-            </div>
-            <h1>Sites profissionais para empresas, eventos e profissionais.</h1>
-            <p>Landing pages e sites institucionais rápidos, modernos e responsivos.</p>
-            <div class="hero-buttons">
-                <a href="https://wa.me/5554996214447" target="_blank" class="btn-primary btn-orcamento"><i class="fab fa-whatsapp"></i> Solicitar orçamento</a>
-                <a href="#projetos" class="btn-primary btn-projetos"><i class="fas fa-th-large"></i> Ver projetos</a>
+            <div class="hero-content">
+                <div class="status-badge">
+                    <span class="dot"></span>
+                    Disponível para novos projetos
+                </div>
+                <div class="hero-avatar">
+                    <img src="vanley.png" alt="Vanley Basso">
+                </div>
+                <h1>Sites profissionais para empresas, eventos e profissionais.</h1>
+                <p>Landing pages e sites institucionais rápidos, modernos e responsivos.</p>
+                <div class="hero-buttons">
+                    <a href="https://wa.me/5554996214447" target="_blank" class="btn-primary btn-orcamento"><i class="fab fa-whatsapp"></i> Solicitar orçamento</a>
+                    <a href="#projetos" class="btn-primary btn-projetos"><i class="fas fa-th-large"></i> Ver projetos</a>
+                </div>
             </div>
         </section>
 
         <!-- Projetos + Resultados -->
-        <h2 id="projetos">Resultados</h2>
-        <div class="section-sub">Projetos que entregam valor e resolvem problemas reais.</div>
+        <h2 id="projetos" class="animate-on-scroll">Resultados</h2>
+        <div class="section-sub animate-on-scroll">Projetos que entregam valor e resolvem problemas reais.</div>
 
-        <div class="projetos-grid">
-            <!-- Projeto 1: Mentoria -->
+        <div class="projetos-grid animate-on-scroll">
             <div class="projeto-card">
                 <div class="thumb">
                     <img src="projeto1.png" alt="Mentoria Da Avaliação à Intervenção">
@@ -793,7 +937,6 @@
                 <a href="https://mentoria-ppd1.onrender.com/" target="_blank" class="btn-ver-projeto">Ver projeto <i class="fas fa-arrow-right"></i></a>
             </div>
 
-            <!-- Projeto 2: Neuropsicopedagoga -->
             <div class="projeto-card">
                 <div class="thumb">
                     <img src="projeto2.png" alt="Neuropsicopedagoga">
@@ -803,7 +946,6 @@
                 <a href="https://marcella-w68g.onrender.com/" target="_blank" class="btn-ver-projeto">Ver projeto <i class="fas fa-arrow-right"></i></a>
             </div>
 
-            <!-- Projeto 3: Salú -->
             <div class="projeto-card">
                 <div class="thumb">
                     <img src="projeto3.png" alt="Salú">
@@ -813,7 +955,6 @@
                 <a href="https://salu-ev.netlify.app/" target="_blank" class="btn-ver-projeto">Ver projeto <i class="fas fa-arrow-right"></i></a>
             </div>
 
-            <!-- Projeto 4: Sognare -->
             <div class="projeto-card">
                 <div class="thumb">
                     <img src="projeto4.png" alt="Clínica Sognare">
@@ -825,9 +966,9 @@
         </div>
 
         <!-- Processo -->
-        <h2>Processo</h2>
-        <div class="section-sub">Do alinhamento à entrega, com total transparência.</div>
-        <div class="processo-lista">
+        <h2 class="animate-on-scroll">Processo</h2>
+        <div class="section-sub animate-on-scroll">Do alinhamento à entrega, com total transparência.</div>
+        <div class="processo-lista animate-on-scroll">
             <div class="processo-item"><span class="processo-num">1</span> Conversa inicial</div>
             <div class="processo-item"><span class="processo-num">2</span> Protótipo</div>
             <div class="processo-item"><span class="processo-num">3</span> Desenvolvimento</div>
@@ -836,17 +977,17 @@
         </div>
 
         <!-- Serviços -->
-        <h2>Serviços</h2>
-        <div class="section-sub">Soluções sob medida para cada necessidade.</div>
-        <div class="servicos-grid">
+        <h2 class="animate-on-scroll">Serviços</h2>
+        <div class="section-sub animate-on-scroll">Soluções sob medida para cada necessidade.</div>
+        <div class="servicos-grid animate-on-scroll">
             <div class="servico-item"><h4>Landing Page</h4><p>Ideal para eventos, campanhas e lançamentos.</p></div>
             <div class="servico-item"><h4>Site Institucional</h4><p>Ideal para empresas que precisam de presença digital.</p></div>
             <div class="servico-item"><h4>Página para profissionais</h4><p>Advogados, nutricionistas, psicólogos, corretores, etc.</p></div>
         </div>
 
         <!-- Diferenciais -->
-        <h2>Diferenciais</h2>
-        <div class="diferenciais-wrapper">
+        <h2 class="animate-on-scroll">Diferenciais</h2>
+        <div class="diferenciais-wrapper animate-on-scroll">
             <div class="card card-soft">
                 <div class="diferenciais-grid">
                     <div class="diferencial-item">
@@ -878,10 +1019,10 @@
         </div>
 
         <!-- Por que ter um site? -->
-        <h2>Por que ter um site hoje?</h2>
-        <div class="section-sub">Motivos que fazem da presença digital um diferencial competitivo.</div>
+        <h2 class="animate-on-scroll">Por que ter um site hoje?</h2>
+        <div class="section-sub animate-on-scroll">Motivos que fazem da presença digital um diferencial competitivo.</div>
 
-        <div class="porque-wrapper">
+        <div class="porque-wrapper animate-on-scroll">
             <div class="porque-grid">
                 <div class="porque-item">
                     <i class="fas fa-globe"></i>
@@ -907,10 +1048,10 @@
         </div>
 
         <!-- Depoimentos -->
-        <h2>Depoimentos</h2>
-        <div class="section-sub">O que os clientes dizem sobre o trabalho.</div>
+        <h2 class="animate-on-scroll">Depoimentos</h2>
+        <div class="section-sub animate-on-scroll">O que os clientes dizem sobre o trabalho.</div>
 
-        <div class="depoimentos-grid">
+        <div class="depoimentos-grid animate-on-scroll">
             <div class="depoimento-item">
                 <div class="estrelas">
                     <i class="fas fa-star"></i>
@@ -951,7 +1092,7 @@
                 </div>
                 <div class="texto">
                     <i class="fas fa-quote-left"></i>
-                    O site da Salú ficou incrível! A equipe adorou o design moderno e a forma como a identidade visual foi aplicada. O aplicativo mobile integrado é um grande diferencial que nossos usuários já estão aproveitando.
+                    O site da Salú ficou incrível! A equipe adorou o design moderno e a forma como a identidade visual foi aplicada. O aplicativo mobile integrado é um grande diferencial.
                 </div>
                 <div class="autor">— Salú</div>
             </div>
@@ -973,9 +1114,9 @@
         </div>
 
         <!-- Contato -->
-        <h2>Contato</h2>
-        <div class="contato-wrapper">
-            <div class="card" style="text-align: center; background: #15111f;">
+        <h2 class="animate-on-scroll">Contato</h2>
+        <div class="contato-wrapper animate-on-scroll">
+            <div class="card" style="text-align: center;">
                 <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
                     <div class="avatar-medium">
                         <img src="vanley.png" alt="Vanley Basso">
@@ -1005,6 +1146,23 @@
 
     <script>
         document.getElementById('anoAtual').textContent = new Date().getFullYear();
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>
