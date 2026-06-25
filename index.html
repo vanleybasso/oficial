@@ -30,6 +30,23 @@
             overflow-x: hidden;
         }
 
+        /* RESET COMPLETO */
+        a,
+        a:link,
+        a:visited,
+        a:hover,
+        a:active,
+        a:focus {
+            text-decoration: none !important;
+            color: inherit !important;
+            background-color: transparent !important;
+            outline: none !important;
+            box-shadow: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+        }
+
         /* Scrollbar personalizada */
         ::-webkit-scrollbar {
             width: 8px;
@@ -44,45 +61,24 @@
 
         /* Animações */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes pulse {
-            0%,
-            100% {
-                box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4);
-            }
-            50% {
-                box-shadow: 0 0 0 20px rgba(124, 58, 237, 0);
-            }
+            0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4); }
+            50% { box-shadow: 0 0 0 20px rgba(124, 58, 237, 0); }
         }
 
         @keyframes gradientMove {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .animate-on-scroll {
@@ -103,10 +99,7 @@
         }
 
         /* Tipografia */
-        h1,
-        h2,
-        h3,
-        h4 {
+        h1, h2, h3, h4 {
             font-family: 'Outfit', sans-serif;
             font-weight: 800;
             letter-spacing: -0.03em;
@@ -177,7 +170,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            text-decoration: none;
+            text-decoration: none !important;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             letter-spacing: -0.01em;
             border: 2px solid transparent;
@@ -188,15 +181,17 @@
             box-sizing: border-box;
             position: relative;
             overflow: hidden;
+            outline: none !important;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -webkit-tap-highlight-color: transparent !important;
         }
 
-        .btn-primary i {
-            font-size: 1.1rem;
-        }
+        .btn-primary i { font-size: 1.1rem; }
 
         .btn-orcamento {
             background: linear-gradient(135deg, #7c3aed, #6d28d9, #5b21b6);
-            color: #ffffff;
+            color: #ffffff !important;
             border-color: rgba(124, 58, 237, 0.3);
             box-shadow: 0 4px 30px rgba(124, 58, 237, 0.25);
         }
@@ -220,33 +215,39 @@
             box-shadow: 0 8px 40px rgba(124, 58, 237, 0.4);
         }
 
-        .btn-projetos {
-            background: transparent;
-            color: #d4cce8;
-            border-color: rgba(124, 58, 237, 0.4);
-            position: relative;
+        /* Link "Ver projetos" no hero - SEM FLECHA */
+        .hero-link-projetos {
+            font-size: 1rem;
+            font-weight: 500;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid rgba(124, 58, 237, 0.3);
+            padding-bottom: 3px;
+            cursor: pointer;
+            outline: none !important;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+            color: #a89bc2 !important;
+            text-decoration: none !important;
         }
 
-        .btn-projetos::after {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 60px;
-            background: linear-gradient(135deg, #7c3aed, #a78bfa);
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .hero-link-projetos:link,
+        .hero-link-projetos:visited,
+        .hero-link-projetos:hover,
+        .hero-link-projetos:active,
+        .hero-link-projetos:focus {
+            color: #a89bc2 !important;
+            text-decoration: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            border-bottom: 2px solid rgba(124, 58, 237, 0.3) !important;
+            background-color: transparent !important;
         }
 
-        .btn-projetos:hover {
-            color: white;
-            border-color: transparent;
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 8px 40px rgba(124, 58, 237, 0.2);
-        }
-
-        .btn-projetos:hover::after {
-            opacity: 1;
+        .hero-link-projetos:hover {
+            color: #d4cce8 !important;
+            border-bottom-color: #a78bfa !important;
         }
 
         /* Hero */
@@ -384,9 +385,7 @@
             transition: transform 0.4s ease;
         }
 
-        .projeto-card:hover .thumb {
-            transform: scale(1.02);
-        }
+        .projeto-card:hover .thumb { transform: scale(1.02); }
 
         .projeto-card .thumb img {
             width: 100%;
@@ -408,29 +407,46 @@
             margin-bottom: 0.8rem;
         }
 
-        .btn-ver-projeto {
-            padding: 0.6rem 1.8rem;
-            border-radius: 60px;
-            font-weight: 600;
+        /* LINK ACESSAR SITE */
+        .link-ver-projeto {
             font-size: 0.95rem;
+            font-weight: 500;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid rgba(74, 61, 102, 0.6);
-            color: #d4cce8;
-            background: transparent;
-            min-width: 140px;
-            justify-content: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid rgba(124, 58, 237, 0.3);
+            padding-bottom: 2px;
+            cursor: pointer;
+            outline: none !important;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+            color: #a89bc2 !important;
+            text-decoration: none !important;
         }
 
-        .btn-ver-projeto:hover {
-            background: #7c3aed;
-            color: white;
-            border-color: #7c3aed;
-            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
-            transform: translateY(-2px);
+        .link-ver-projeto:link,
+        .link-ver-projeto:visited,
+        .link-ver-projeto:hover,
+        .link-ver-projeto:active,
+        .link-ver-projeto:focus {
+            color: #a89bc2 !important;
+            text-decoration: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            border-bottom: 2px solid rgba(124, 58, 237, 0.3) !important;
+            background-color: transparent !important;
+        }
+
+        .link-ver-projeto i {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+            color: #a89bc2 !important;
+        }
+
+        .link-ver-projeto:hover i {
+            transform: translateX(4px);
         }
 
         /* Processo */
@@ -507,10 +523,7 @@
             margin-bottom: 0.1rem;
             color: #f0ebff;
         }
-
-        .servico-item p {
-            color: #a89bc2;
-        }
+        .servico-item p { color: #a89bc2; }
 
         /* Diferenciais */
         .diferenciais-wrapper {
@@ -674,7 +687,7 @@
         }
 
         .contato-redes a {
-            color: #b0a4cc;
+            color: #b0a4cc !important;
             font-size: 1.6rem;
             transition: all 0.3s ease;
             background: rgba(26, 21, 40, 0.7);
@@ -685,12 +698,27 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
+            text-decoration: none !important;
             border: 1px solid rgba(51, 43, 74, 0.5);
+            outline: none !important;
+            box-shadow: none !important;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+        }
+
+        .contato-redes a:focus,
+        .contato-redes a:active,
+        .contato-redes a:visited {
+            color: #b0a4cc !important;
+            background: rgba(26, 21, 40, 0.7) !important;
+            border-color: rgba(51, 43, 74, 0.5) !important;
+            outline: none !important;
+            box-shadow: none !important;
         }
 
         .contato-redes a:hover {
-            color: white;
+            color: white !important;
             background: rgba(124, 58, 237, 0.3);
             border-color: #7c3aed;
             transform: scale(1.1) translateY(-4px);
@@ -737,168 +765,86 @@
             height: 60px;
             border-radius: 50%;
             background: linear-gradient(135deg, #7c3aed, #6d28d9);
-            color: #fff;
+            color: #fff !important;
             font-size: 2rem;
-            text-decoration: none;
+            text-decoration: none !important;
             box-shadow: 0 4px 30px rgba(124, 58, 237, 0.4);
             border: 2px solid rgba(124, 58, 237, 0.3);
             transition: all 0.3s ease;
             animation: pulse 2s infinite;
+            outline: none !important;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+        }
+
+        .whatsapp-float:focus,
+        .whatsapp-float:active,
+        .whatsapp-float:visited {
+            color: #fff !important;
+            outline: none !important;
+            box-shadow: 0 4px 30px rgba(124, 58, 237, 0.4) !important;
         }
 
         .whatsapp-float:hover {
             transform: scale(1.15) rotate(-5deg);
             box-shadow: 0 8px 50px rgba(124, 58, 237, 0.5);
             border-color: #a78bfa;
+            color: #fff !important;
         }
 
-        .whatsapp-float i {
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-        }
+        .whatsapp-float i { filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)); }
 
         /* Responsivo */
         @media (min-width: 640px) {
-            .projetos-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .servicos-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            .hero-buttons {
-                flex-direction: row;
-                gap: 0.8rem;
-            }
-            .btn-primary {
-                width: auto;
-                min-width: 200px;
-                max-width: none;
-            }
+            .projetos-grid { grid-template-columns: 1fr 1fr; }
+            .servicos-grid { grid-template-columns: 1fr 1fr; }
+            .hero h1 { font-size: 2.8rem; }
+            .hero-buttons { flex-direction: row; gap: 0.8rem; }
+            .btn-primary { width: auto; min-width: 200px; max-width: none; }
         }
 
         @media (min-width: 860px) {
-            .projetos-grid {
-                grid-template-columns: 1fr 1fr 1fr 1fr;
-                gap: 1.8rem;
-            }
-            .hero h1 {
-                font-size: 3.6rem;
-            }
-            .depoimentos-grid {
-                grid-template-columns: 1fr 1fr 1fr 1fr;
-                gap: 1.8rem;
-            }
-            .depoimento-item {
-                padding: 2rem 2rem;
-            }
-            .depoimento-item .texto {
-                font-size: 1rem;
-                line-height: 1.7;
-            }
-            .porque-grid {
-                grid-template-columns: 1fr 1fr 1fr 1fr;
-            }
-            .servicos-grid {
-                grid-template-columns: 1fr 1fr 1fr;
-            }
+            .projetos-grid { grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1.8rem; }
+            .hero h1 { font-size: 3.6rem; }
+            .depoimentos-grid { grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1.8rem; }
+            .depoimento-item { padding: 2rem 2rem; }
+            .depoimento-item .texto { font-size: 1rem; line-height: 1.7; }
+            .porque-grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
+            .servicos-grid { grid-template-columns: 1fr 1fr 1fr; }
         }
 
         @media (max-width: 640px) {
-            .projetos-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .diferenciais-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .depoimentos-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .porque-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .hero h1 {
-                font-size: 2rem;
-            }
+            .projetos-grid { grid-template-columns: 1fr 1fr; }
+            .diferenciais-grid { grid-template-columns: repeat(2, 1fr); }
+            .depoimentos-grid { grid-template-columns: 1fr 1fr; }
+            .porque-grid { grid-template-columns: 1fr 1fr; }
+            .hero h1 { font-size: 2rem; }
         }
 
         @media (max-width: 480px) {
-            .btn-primary {
-                min-width: 160px;
-                padding: 0.7rem 1.4rem;
-                font-size: 0.85rem;
-                max-width: 220px;
-            }
-            .hero-buttons {
-                gap: 0.5rem;
-            }
-            .hero h1 {
-                font-size: 1.6rem;
-            }
-            .hero-avatar {
-                width: 100px;
-                height: 100px;
-            }
-            .projetos-grid {
-                grid-template-columns: 1fr;
-            }
-            .btn-ver-projeto {
-                min-width: 120px;
-                font-size: 0.85rem;
-                padding: 0.5rem 1.2rem;
-            }
-            .diferenciais-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 0.6rem;
-            }
-            .diferencial-item {
-                padding: 0.8rem 0.4rem;
-            }
-            .diferencial-item i {
-                font-size: 1.4rem;
-            }
-            .diferencial-item span {
-                font-size: 0.75rem;
-            }
-            .depoimentos-grid {
-                grid-template-columns: 1fr;
-                gap: 0.8rem;
-            }
-            .depoimento-item {
-                padding: 1rem 1rem;
-            }
-            .depoimento-item .texto {
-                font-size: 0.85rem;
-            }
-            .porque-grid {
-                grid-template-columns: 1fr;
-                gap: 0.8rem;
-            }
-            .porque-item {
-                padding: 1rem 1rem;
-            }
-            .whatsapp-float {
-                width: 50px;
-                height: 50px;
-                font-size: 1.6rem;
-                bottom: 20px;
-                right: 20px;
-            }
-            h2 {
-                font-size: 1.8rem;
-            }
+            .btn-primary { min-width: 160px; padding: 0.7rem 1.4rem; font-size: 0.85rem; max-width: 220px; }
+            .hero-buttons { gap: 0.5rem; }
+            .hero h1 { font-size: 1.6rem; }
+            .hero-avatar { width: 100px; height: 100px; }
+            .projetos-grid { grid-template-columns: 1fr; }
+            .link-ver-projeto { font-size: 0.85rem; }
+            .diferenciais-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+            .diferencial-item { padding: 0.8rem 0.4rem; }
+            .diferencial-item i { font-size: 1.4rem; }
+            .diferencial-item span { font-size: 0.75rem; }
+            .depoimentos-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+            .depoimento-item { padding: 1rem 1rem; }
+            .depoimento-item .texto { font-size: 0.85rem; }
+            .porque-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+            .porque-item { padding: 1rem 1rem; }
+            .whatsapp-float { width: 50px; height: 50px; font-size: 1.6rem; bottom: 20px; right: 20px; }
+            h2 { font-size: 1.8rem; }
+            .hero-link-projetos { font-size: 0.9rem; }
         }
 
-        .text-center {
-            text-align: center;
-        }
-
-        hr {
-            border: 0;
-            border-top: 1px solid rgba(42, 35, 64, 0.5);
-            margin: 2rem 0 0.5rem 0;
-        }
+        .text-center { text-align: center; }
+        hr { border: 0; border-top: 1px solid rgba(42, 35, 64, 0.5); margin: 2rem 0 0.5rem 0; }
     </style>
 </head>
 <body>
@@ -917,8 +863,8 @@
                 <h1>Sites profissionais para empresas, eventos e profissionais.</h1>
                 <p>Landing pages e sites institucionais rápidos, modernos e responsivos.</p>
                 <div class="hero-buttons">
-                    <a href="https://wa.me/5554996214447" target="_blank" class="btn-primary btn-orcamento"><i class="fab fa-whatsapp"></i> Solicitar orçamento</a>
-                    <a href="#projetos" class="btn-primary btn-projetos"><i class="fas fa-th-large"></i> Ver projetos</a>
+                    <a href="https://wa.me/5554996214447" target="_blank" class="btn-primary btn-orcamento" onclick="this.blur()"><i class="fab fa-whatsapp"></i> Solicitar orçamento</a>
+                    <a href="#projetos" class="hero-link-projetos" onclick="this.blur()">Ver projetos</a>
                 </div>
             </div>
         </section>
@@ -928,40 +874,52 @@
         <div class="section-sub animate-on-scroll">Projetos que entregam valor e resolvem problemas reais.</div>
 
         <div class="projetos-grid animate-on-scroll">
+            <!-- Projeto 1: Mentoria -->
             <div class="projeto-card">
                 <div class="thumb">
                     <img src="projeto1.png" alt="Mentoria Da Avaliação à Intervenção">
                 </div>
                 <h4>Mentoria Da Avaliação à Intervenção</h4>
                 <div class="categoria">Landing Page · Divulgação e inscrições</div>
-                <a href="https://mentoria-ppd1.onrender.com/" target="_blank" class="btn-ver-projeto">Ver projeto <i class="fas fa-arrow-right"></i></a>
+                <a href="https://mentoria-ppd1.onrender.com/" target="_blank" class="link-ver-projeto" onclick="this.blur()">
+                    Acessar site <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
 
+            <!-- Projeto 2: Neuropsicopedagoga -->
             <div class="projeto-card">
                 <div class="thumb">
                     <img src="projeto2.png" alt="Neuropsicopedagoga">
                 </div>
                 <h4>Neuropsicopedagoga</h4>
                 <div class="categoria">Site profissional · Apresentação e contato</div>
-                <a href="https://marcella-w68g.onrender.com/" target="_blank" class="btn-ver-projeto">Ver projeto <i class="fas fa-arrow-right"></i></a>
+                <a href="https://marcella-w68g.onrender.com/" target="_blank" class="link-ver-projeto" onclick="this.blur()">
+                    Acessar site <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
 
+            <!-- Projeto 3: Salú -->
             <div class="projeto-card">
                 <div class="thumb">
                     <img src="projeto3.png" alt="Salú">
                 </div>
                 <h4>Salú</h4>
                 <div class="categoria">Site institucional · Aplicativo mobile</div>
-                <a href="https://salu-ev.netlify.app/" target="_blank" class="btn-ver-projeto">Ver projeto <i class="fas fa-arrow-right"></i></a>
+                <a href="https://salu-ev.netlify.app/" target="_blank" class="link-ver-projeto" onclick="this.blur()">
+                    Acessar site <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
 
+            <!-- Projeto 4: Sognare -->
             <div class="projeto-card">
                 <div class="thumb">
                     <img src="projeto4.png" alt="Clínica Sognare">
                 </div>
                 <h4>Clínica Sognare</h4>
                 <div class="categoria">Site institucional · Clínica multidisciplinar</div>
-                <a href="https://clinicasognare.com.br/" target="_blank" class="btn-ver-projeto">Ver projeto <i class="fas fa-arrow-right"></i></a>
+                <a href="https://clinicasognare.com.br/" target="_blank" class="link-ver-projeto" onclick="this.blur()">
+                    Acessar site <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
 
@@ -1123,16 +1081,16 @@
                     </div>
                     <div><h3 style="margin-bottom: 0; color: #f0ebff;">Vanley Basso</h3></div>
                 </div>
-                <a href="https://wa.me/5554996214447" target="_blank" class="btn-primary btn-orcamento" style="margin: 1rem 0;"><i class="fab fa-whatsapp"></i> Solicitar orçamento</a>
+                <a href="https://wa.me/5554996214447" target="_blank" class="btn-primary btn-orcamento" style="margin: 1rem 0;" onclick="this.blur()"><i class="fab fa-whatsapp"></i> Solicitar orçamento</a>
                 <div class="contato-redes">
-                    <a href="https://wa.me/5554996214447" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://instagram.com/vanleybasso" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/in/vanleybasso/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://wa.me/5554996214447" target="_blank" aria-label="WhatsApp" onclick="this.blur()"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/vanleybasso" target="_blank" aria-label="Instagram" onclick="this.blur()"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/vanleybasso/" target="_blank" aria-label="LinkedIn" onclick="this.blur()"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
         </div>
 
-        <hr>
+        <!-- Footer com apenas uma linha -->
         <div class="footer-meta">
             <p>© <span id="anoAtual"></span> Vanley Basso · Sites que conectam pessoas.</p>
         </div>
@@ -1140,7 +1098,7 @@
     </div>
 
     <!-- Botão flutuante WhatsApp -->
-    <a href="https://wa.me/5554996214447" target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+    <a href="https://wa.me/5554996214447" target="_blank" class="whatsapp-float" aria-label="WhatsApp" onclick="this.blur()">
         <i class="fab fa-whatsapp"></i>
     </a>
 
