@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Vanley Basso · Sites profissionais</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0b0815;
+            color: #e8e2f0;
+            line-height: 1.6;
+            padding: 0 0 2rem 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 22px;
+        }
+
+        /* Tipografia */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 0.2rem;
+            margin-top: 2.8rem;
+            position: relative;
+            display: inline-block;
+            color: #f0ebff;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 48px;
+            height: 4px;
+            background: linear-gradient(90deg, #a78bfa, #7c3aed);
+            border-radius: 4px;
+        }
+
+        .section-sub {
+            color: #a89bc2;
+            margin-bottom: 1.8rem;
+            font-weight: 400;
+            padding-left: 0;
+            margin-top: 0.5rem;
+        }
+
+        /* Cards com fundo escuro e bordas sutis */
+        .card {
+            background: #15111f;
+            border-radius: 28px;
+            padding: 2rem 1.8rem;
+            border: 1px solid #2a2340;
+            transition: 0.25s ease;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-soft {
+            background: #1a1528;
+            border: 1px solid #332b4a;
+        }
+
+        /* Botões principais - mesma base, mesmas dimensões */
+        .btn-primary {
+            padding: 0.85rem 2rem;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: 0.25s;
+            letter-spacing: -0.01em;
+            border: 2px solid transparent;
+            min-width: 220px;
+            text-align: center;
+            line-height: 1.4;
+            box-sizing: border-box;
+        }
+
+        .btn-primary i {
+            font-size: 1.1rem;
+        }
+
+        /* Botão orçamento - roxo escuro sólido */
+        .btn-orcamento {
+            background: linear-gradient(135deg, #3d2d5e, #281d42);
+            color: #e8e2f0;
+            border-color: #4a3a6b;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.12);
+        }
+
+        .btn-orcamento:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: linear-gradient(135deg, #4a3a6b, #32234f);
+            border-color: #7c3aed;
+            box-shadow: 0 8px 28px rgba(124, 58, 237, 0.25);
+            color: #f0ebff;
+        }
+
+        /* Botão projetos - outline com mesma largura */
+        .btn-projetos {
+            background: transparent;
+            color: #d4cce8;
+            border-color: #4a3d66;
+        }
+
+        .btn-projetos:hover {
+            background: #7c3aed;
+            color: white;
+            border-color: #7c3aed;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 2rem 0 1rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 999px;
+            margin: 0 auto 1rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 16px 48px rgba(124, 58, 237, 0.2);
+            border: 3px solid #3a2a5a;
+            background: #2d1f4a;
+        }
+
+        .hero-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 15%;
+        }
+
+        .hero h1 {
+            font-size: 1.8rem;
+            line-height: 1.2;
+            margin-bottom: 0.3rem;
+            background: linear-gradient(135deg, #e8e0ff, #b8a0e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #b0a4cc;
+            max-width: 500px;
+            margin: 0 auto 0.4rem auto;
+            font-weight: 400;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        /* Projetos - melhorado para web */
+        .projetos-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.8rem;
+            margin: 1.8rem 0;
+        }
+
+        .projeto-card {
+            background: #15111f;
+            border-radius: 28px;
+            padding: 1.6rem 1.5rem 1.8rem;
+            border: 1px solid #2a2340;
+            transition: 0.25s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .projeto-card:hover {
+            transform: translateY(-6px);
+            border-color: #5a4680;
+            box-shadow: 0 16px 48px rgba(124, 58, 237, 0.12);
+        }
+
+        .projeto-card .thumb {
+            width: 100%;
+            height: 180px;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            border: 1px solid #332b4a;
+            background: #1a142b;
+        }
+
+        .projeto-card .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .projeto-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.1rem;
+            color: #f0ebff;
+        }
+
+        .projeto-card .categoria {
+            color: #a89bc2;
+            font-size: 0.9rem;
+            font-weight: 400;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Botão "Ver projeto" padrão - mesmo estilo dos botões principais */
+        .btn-ver-projeto {
+            padding: 0.6rem 1.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: 0.25s;
+            border: 2px solid #4a3d66;
+            color: #d4cce8;
+            background: transparent;
+            min-width: 140px;
+            justify-content: center;
+        }
+
+        .btn-ver-projeto:hover {
+            background: #7c3aed;
+            color: white;
+            border-color: #7c3aed;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Processo */
+        .processo-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin: 0.5rem 0 1rem 0;
+        }
+
+        .processo-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            background: #15111f;
+            padding: 0.8rem 1.6rem;
+            border-radius: 60px;
+            border: 1px solid #2a2340;
+            transition: 0.15s;
+            font-weight: 500;
+            color: #d4cce8;
+        }
+
+        .processo-item:hover {
+            border-color: #5a4680;
+            background: #1a1528;
+        }
+
+        .processo-num {
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+            color: white;
+            width: 34px;
+            height: 34px;
+            border-radius: 99px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        /* Serviços */
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+            margin: 1.2rem 0;
+        }
+
+        .servico-item {
+            background: #15111f;
+            padding: 1.4rem 1.8rem;
+            border-radius: 24px;
+            border-left: 6px solid #7c3aed;
+            border: 1px solid #2a2340;
+            border-left-width: 6px;
+            transition: 0.15s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .servico-item:hover {
+            border-left-color: #a78bfa;
+            background: #1a1528;
+        }
+
+        .servico-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.1rem;
+            color: #f0ebff;
+        }
+
+        .servico-item p {
+            color: #a89bc2;
+        }
+
+        /* Diferenciais - com MUITO espaçamento */
+        .diferenciais-wrapper {
+            margin-top: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .diferenciais-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            padding-top: 0.5rem;
+        }
+
+        .diferencial-item {
+            background: #15111f;
+            border: 1px solid #2a2340;
+            border-radius: 20px;
+            padding: 1.2rem 0.8rem;
+            text-align: center;
+            transition: 0.25s ease;
+        }
+
+        .diferencial-item:hover {
+            border-color: #7c3aed;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.1);
+        }
+
+        .diferencial-item i {
+            font-size: 1.8rem;
+            color: #a78bfa;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .diferencial-item span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #d4cce8;
+            display: block;
+        }
+
+        /* Por que ter um site? */
+        .porque-wrapper {
+            margin-top: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .porque-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+
+        .porque-item {
+            background: #15111f;
+            border: 1px solid #2a2340;
+            border-radius: 20px;
+            padding: 1.5rem 1.2rem;
+            transition: 0.25s ease;
+        }
+
+        .porque-item:hover {
+            border-color: #7c3aed;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.1);
+        }
+
+        .porque-item i {
+            font-size: 1.8rem;
+            color: #a78bfa;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .porque-item h4 {
+            font-size: 1.1rem;
+            color: #f0ebff;
+            margin-bottom: 0.3rem;
+        }
+
+        .porque-item p {
+            font-size: 0.9rem;
+            color: #a89bc2;
+            line-height: 1.5;
+        }
+
+        /* Depoimentos - melhorado para web */
+        .depoimentos-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .depoimento-item {
+            background: linear-gradient(145deg, #1a1528, #15111f);
+            padding: 1.8rem 1.8rem;
+            border-radius: 24px;
+            border: 1px solid #332b4a;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            transition: 0.25s ease;
+        }
+
+        .depoimento-item:hover {
+            border-color: #7c3aed;
+            transform: translateY(-3px);
+        }
+
+        .depoimento-item .estrelas {
+            color: #fbbf24;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.4rem;
+        }
+
+        .depoimento-item i {
+            color: #a78bfa;
+            font-size: 1.2rem;
+            margin-right: 6px;
+        }
+
+        .depoimento-item .texto {
+            font-style: italic;
+            color: #d4cce8;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .depoimento-item .autor {
+            font-style: normal;
+            font-weight: 700;
+            color: #c4b5e6;
+            font-size: 0.9rem;
+        }
+
+        /* Contato - com espaçamento */
+        .contato-wrapper {
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contato-redes {
+            display: flex;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+            margin: 1.2rem 0 0.2rem 0;
+            justify-content: center;
+        }
+
+        .contato-redes a {
+            color: #b0a4cc;
+            font-size: 1.6rem;
+            transition: 0.25s;
+            background: #1a1528;
+            width: 56px;
+            height: 56px;
+            border-radius: 99px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border: 1px solid #332b4a;
+        }
+
+        .contato-redes a:hover {
+            color: white;
+            background: #7c3aed;
+            border-color: #7c3aed;
+            transform: scale(1.08);
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.25);
+        }
+
+        .footer-meta {
+            margin-top: 3.5rem;
+            text-align: center;
+            color: #6a5d82;
+            font-size: 0.9rem;
+            border-top: 1px solid #2a2340;
+            padding-top: 2rem;
+        }
+
+        /* Avatar para a seção "Contato" */
+        .avatar-medium {
+            width: 72px;
+            height: 72px;
+            border-radius: 999px;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 2px solid #4a3a6b;
+            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.12);
+            background: #2d1f4a;
+        }
+
+        .avatar-medium img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 15%;
+        }
+
+        /* Botão flutuante WhatsApp - estilo escuro/roxo */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3d2d5e, #281d42);
+            color: #e8e2f0;
+            font-size: 2rem;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+            border: 2px solid #4a3a6b;
+            transition: 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, #4a3a6b, #32234f);
+            border-color: #7c3aed;
+            box-shadow: 0 8px 32px rgba(124, 58, 237, 0.5);
+            color: #f0ebff;
+        }
+
+        .whatsapp-float i {
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        /* responsivo */
+        @media (min-width: 640px) {
+            .projetos-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .servicos-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (min-width: 860px) {
+            .projetos-grid {
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                gap: 1.8rem;
+            }
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+            .depoimentos-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.8rem;
+            }
+            .depoimento-item {
+                padding: 2rem 2rem;
+            }
+            .depoimento-item .texto {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+            .porque-grid {
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
+            .servicos-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .projetos-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .diferenciais-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .depoimentos-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .porque-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .btn-primary {
+                min-width: 160px;
+                padding: 0.7rem 1.4rem;
+                font-size: 0.85rem;
+            }
+            .hero-buttons {
+                gap: 0.5rem;
+            }
+            .avatar-medium {
+                width: 56px;
+                height: 56px;
+            }
+            .hero-avatar {
+                width: 100px;
+                height: 100px;
+            }
+            .projetos-grid {
+                grid-template-columns: 1fr;
+            }
+            .btn-ver-projeto {
+                min-width: 120px;
+                font-size: 0.85rem;
+                padding: 0.5rem 1.2rem;
+            }
+            .diferenciais-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.6rem;
+            }
+            .diferencial-item {
+                padding: 0.8rem 0.4rem;
+            }
+            .diferencial-item i {
+                font-size: 1.4rem;
+            }
+            .diferencial-item span {
+                font-size: 0.75rem;
+            }
+            .diferenciais-wrapper {
+                margin-top: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            .depoimentos-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+            .depoimento-item {
+                padding: 1rem 1rem;
+            }
+            .depoimento-item .texto {
+                font-size: 0.85rem;
+            }
+            .contato-wrapper {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.6rem;
+                bottom: 20px;
+                right: 20px;
+            }
+            .porque-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+            .porque-item {
+                padding: 1rem 1rem;
+            }
+            .porque-item i {
+                font-size: 1.4rem;
+            }
+            .porque-item h4 {
+                font-size: 1rem;
+            }
+            .porque-item p {
+                font-size: 0.85rem;
+            }
+            .porque-wrapper {
+                margin-top: 1rem;
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        .text-center {
+            text-align: center;
+        }
+        .mt-1 {
+            margin-top: 0.5rem;
+        }
+        .mb-1 {
+            margin-bottom: 0.5rem;
+        }
+        .mb-2 {
+            margin-bottom: 1.2rem;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #2a2340;
+            margin: 2.2rem 0 0.5rem 0;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-avatar">
+                <img src="vanley.png" alt="Vanley Basso">
+            </div>
+            <h1>Sites profissionais para empresas, eventos e profissionais.</h1>
+            <p>Landing pages e sites institucionais rápidos, modernos e responsivos.</p>
+            <div class="hero-buttons">
+                <a href="https://wa.me/5554996214447" target="_blank" class="btn-primary btn-orcamento"><i class="fab fa-whatsapp"></i> Solicitar orçamento</a>
+                <a href="#projetos" class="btn-primary btn-projetos"><i class="fas fa-th-large"></i> Ver projetos</a>
+            </div>
+        </section>
+
+        <!-- Projetos + Resultados -->
+        <h2 id="projetos">Resultados</h2>
+        <div class="section-sub">Projetos que entregam valor e resolvem problemas reais.</div>
+
+        <div class="projetos-grid">
+            <!-- Projeto 1: Mentoria -->
+            <div class="projeto-card">
+                <div class="thumb">
+                    <img src="projeto1.png" alt="Mentoria Da Avaliação à Intervenção">
+                </div>
+                <h4>Mentoria Da Avaliação à Intervenção</h4>
+                <div class="categoria">Landing Page · Divulgação e inscrições</div>
+                <a href="https://mentoria-ppd1.onrender.com/" target="_blank" class="btn-ver-projeto">Ver projeto <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Projeto 2: Neuropsicopedagoga -->
+            <div class="projeto-card">
+                <div class="thumb">
+                    <img src="projeto2.png" alt="Neuropsicopedagoga">
+                </div>
+                <h4>Neuropsicopedagoga</h4>
+                <div class="categoria">Site profissional · Apresentação e contato</div>
+                <a href="https://marcella-w68g.onrender.com/" target="_blank" class="btn-ver-projeto">Ver projeto <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Projeto 3: Salú -->
+            <div class="projeto-card">
+                <div class="thumb">
+                    <img src="projeto3.png" alt="Salú">
+                </div>
+                <h4>Salú</h4>
+                <div class="categoria">Site institucional · Aplicativo mobile</div>
+                <a href="https://salu-ev.netlify.app/" target="_blank" class="btn-ver-projeto">Ver projeto <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Projeto 4: Sognare -->
+            <div class="projeto-card">
+                <div class="thumb">
+                    <img src="projeto4.png" alt="Clínica Sognare">
+                </div>
+                <h4>Clínica Sognare</h4>
+                <div class="categoria">Site institucional · Clínica multidisciplinar</div>
+                <a href="https://clinicasognare.com.br/" target="_blank" class="btn-ver-projeto">Ver projeto <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- Processo -->
+        <h2>Processo</h2>
+        <div class="section-sub">Do alinhamento à entrega, com total transparência.</div>
+        <div class="processo-lista">
+            <div class="processo-item"><span class="processo-num">1</span> Conversa inicial</div>
+            <div class="processo-item"><span class="processo-num">2</span> Protótipo</div>
+            <div class="processo-item"><span class="processo-num">3</span> Desenvolvimento</div>
+            <div class="processo-item"><span class="processo-num">4</span> Publicação</div>
+            <div class="processo-item"><span class="processo-num">5</span> Suporte</div>
+        </div>
+
+        <!-- Serviços -->
+        <h2>Serviços</h2>
+        <div class="section-sub">Soluções sob medida para cada necessidade.</div>
+        <div class="servicos-grid">
+            <div class="servico-item"><h4>Landing Page</h4><p>Ideal para eventos, campanhas e lançamentos.</p></div>
+            <div class="servico-item"><h4>Site Institucional</h4><p>Ideal para empresas que precisam de presença digital.</p></div>
+            <div class="servico-item"><h4>Página para profissionais</h4><p>Advogados, nutricionistas, psicólogos, corretores, etc.</p></div>
+        </div>
+
+        <!-- Diferenciais -->
+        <h2>Diferenciais</h2>
+        <div class="diferenciais-wrapper">
+            <div class="card card-soft">
+                <div class="diferenciais-grid">
+                    <div class="diferencial-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>Responsivo</span>
+                    </div>
+                    <div class="diferencial-item">
+                        <i class="fas fa-rocket"></i>
+                        <span>Otimizado</span>
+                    </div>
+                    <div class="diferencial-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Integração WhatsApp</span>
+                    </div>
+                    <div class="diferencial-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Entrega rápida</span>
+                    </div>
+                    <div class="diferencial-item">
+                        <i class="fas fa-globe"></i>
+                        <span>Domínio e hospedagem</span>
+                    </div>
+                    <div class="diferencial-item">
+                        <i class="fas fa-headset"></i>
+                        <span>Suporte pós-entrega</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Por que ter um site? -->
+        <h2>Por que ter um site hoje?</h2>
+        <div class="section-sub">Motivos que fazem da presença digital um diferencial competitivo.</div>
+
+        <div class="porque-wrapper">
+            <div class="porque-grid">
+                <div class="porque-item">
+                    <i class="fas fa-globe"></i>
+                    <h4>Visibilidade 24h</h4>
+                    <p>Seu negócio disponível para o mundo todo, a qualquer hora, sem restrições de horário ou localização.</p>
+                </div>
+                <div class="porque-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>Credibilidade</h4>
+                    <p>Um site profissional transmite confiança e seriedade, mostrando que você investe na sua imagem.</p>
+                </div>
+                <div class="porque-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Geração de Leads</h4>
+                    <p>Um site bem estruturado capta clientes 24/7, com formulários, WhatsApp e chamadas para ação.</p>
+                </div>
+                <div class="porque-item">
+                    <i class="fas fa-search"></i>
+                    <h4>SEO e Autoridade</h4>
+                    <p>Apareça no Google e seja encontrado por quem realmente procura pelos seus produtos ou serviços.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Depoimentos -->
+        <h2>Depoimentos</h2>
+        <div class="section-sub">O que os clientes dizem sobre o trabalho.</div>
+
+        <div class="depoimentos-grid">
+            <div class="depoimento-item">
+                <div class="estrelas">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="texto">
+                    <i class="fas fa-quote-left"></i>
+                    A landing page que o Vanley criou superou todas as expectativas. Conseguiu capturar a essência do projeto e comunicar de forma clara e objetiva. As inscrições aumentaram significativamente!
+                </div>
+                <div class="autor">— Mentoria Da Avaliação à Intervenção</div>
+            </div>
+
+            <div class="depoimento-item">
+                <div class="estrelas">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="texto">
+                    <i class="fas fa-quote-left"></i>
+                    O site profissional que o Vanley desenvolveu para mim trouxe mais credibilidade e organização para o meu trabalho. Meus pacientes elogiam a facilidade de encontrar informações e agendar consultas.
+                </div>
+                <div class="autor">— Marcella · Neuropsicopedagoga</div>
+            </div>
+
+            <div class="depoimento-item">
+                <div class="estrelas">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="texto">
+                    <i class="fas fa-quote-left"></i>
+                    O site da Salú ficou incrível! A equipe adorou o design moderno e a forma como a identidade visual foi aplicada. O aplicativo mobile integrado é um grande diferencial que nossos usuários já estão aproveitando.
+                </div>
+                <div class="autor">— Salú</div>
+            </div>
+
+            <div class="depoimento-item">
+                <div class="estrelas">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="texto">
+                    <i class="fas fa-quote-left"></i>
+                    O site da Clínica Sognare trouxe mais visibilidade e confiança para nossos pacientes. A navegação é intuitiva e o design transmite exatamente o acolhimento que buscamos oferecer.
+                </div>
+                <div class="autor">— Clínica Sognare</div>
+            </div>
+        </div>
+
+        <!-- Contato -->
+        <h2>Contato</h2>
+        <div class="contato-wrapper">
+            <div class="card" style="text-align: center; background: #15111f;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                    <div class="avatar-medium">
+                        <img src="vanley.png" alt="Vanley Basso">
+                    </div>
+                    <div><h3 style="margin-bottom: 0; color: #f0ebff;">Vanley Basso</h3></div>
+                </div>
+                <a href="https://wa.me/5554996214447" target="_blank" class="btn-primary btn-orcamento" style="margin: 1rem 0;"><i class="fab fa-whatsapp"></i> Solicitar orçamento</a>
+                <div class="contato-redes">
+                    <a href="https://wa.me/5554996214447" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/vanleybasso" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/vanleybasso/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <div class="footer-meta">
+            <p>© <span id="anoAtual"></span> Vanley Basso · Sites que conectam pessoas.</p>
+        </div>
+
+    </div>
+
+    <!-- Botão flutuante WhatsApp -->
+    <a href="https://wa.me/5554996214447" target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        document.getElementById('anoAtual').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
