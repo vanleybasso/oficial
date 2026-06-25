@@ -28,9 +28,21 @@
             line-height: 1.6;
             padding: 0 0 2rem 0;
             overflow-x: hidden;
+            cursor: auto;
         }
 
-        /* RESET COMPLETO */
+        /* PARTÍCULAS - CANVAS */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* RESET COMPLETO - FORÇA TODOS OS ESTADOS SEM MUDANÇA DE COR */
         a,
         a:link,
         a:visited,
@@ -81,6 +93,16 @@
             100% { background-position: 0% 50%; }
         }
 
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.2), 0 0 60px rgba(124, 58, 237, 0.05); }
+            50% { box-shadow: 0 0 40px rgba(124, 58, 237, 0.4), 0 0 100px rgba(124, 58, 237, 0.1); }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(40px);
@@ -96,6 +118,8 @@
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 22px;
+            position: relative;
+            z-index: 1;
         }
 
         /* Tipografia */
@@ -123,6 +147,7 @@
             height: 4px;
             background: linear-gradient(90deg, #a78bfa, #7c3aed, #6d28d9);
             border-radius: 4px;
+            animation: glow-pulse 2s infinite;
         }
 
         .section-sub {
@@ -145,6 +170,20 @@
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             margin-bottom: 1.8rem;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            animation: glow-pulse 3s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.03), transparent 50%, rgba(167, 139, 250, 0.03));
+            pointer-events: none;
         }
 
         .card:hover {
@@ -191,9 +230,11 @@
 
         .btn-orcamento {
             background: linear-gradient(135deg, #7c3aed, #6d28d9, #5b21b6);
+            background-size: 300% 300%;
             color: #ffffff !important;
             border-color: rgba(124, 58, 237, 0.3);
             box-shadow: 0 4px 30px rgba(124, 58, 237, 0.25);
+            animation: gradientMove 4s ease infinite;
         }
 
         .btn-orcamento::before {
@@ -215,21 +256,43 @@
             box-shadow: 0 8px 40px rgba(124, 58, 237, 0.4);
         }
 
-        /* Link "Ver projetos" no hero - SEM FLECHA */
+        /* Botão "Ver projetos" - SEM ABSOLUTAMENTE NENHUMA MUDANÇA DE COR */
         .hero-link-projetos {
+            padding: 0.9rem 2.2rem;
+            border-radius: 60px;
+            font-weight: 700;
             font-size: 1rem;
-            font-weight: 500;
-            display: inline-block;
-            transition: all 0.3s ease;
-            border-bottom: 2px solid rgba(124, 58, 237, 0.3);
-            padding-bottom: 3px;
-            cursor: pointer;
-            outline: none !important;
-            user-select: none !important;
-            -webkit-user-select: none !important;
-            -webkit-tap-highlight-color: transparent !important;
-            color: #a89bc2 !important;
-            text-decoration: none !important;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            letter-spacing: -0.01em;
+            border: 2px solid rgba(124, 58, 237, 0.3);
+            width: 100%;
+            max-width: 280px;
+            text-align: center;
+            line-height: 1.4;
+            box-sizing: border-box;
+            color: #d4cce8 !important;
+            background: transparent !important;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-link-projetos::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .hero-link-projetos:hover::before {
+            left: 100%;
         }
 
         .hero-link-projetos:link,
@@ -237,17 +300,26 @@
         .hero-link-projetos:hover,
         .hero-link-projetos:active,
         .hero-link-projetos:focus {
-            color: #a89bc2 !important;
+            color: #d4cce8 !important;
             text-decoration: none !important;
             outline: none !important;
             box-shadow: none !important;
-            border-bottom: 2px solid rgba(124, 58, 237, 0.3) !important;
-            background-color: transparent !important;
+            border: 2px solid rgba(124, 58, 237, 0.3) !important;
+            background: transparent !important;
+        }
+
+        .hero-link-projetos i {
+            font-size: 1.1rem;
+            color: #a78bfa !important;
+            transition: transform 0.3s ease;
         }
 
         .hero-link-projetos:hover {
-            color: #d4cce8 !important;
-            border-bottom-color: #a78bfa !important;
+            transform: translateY(-3px) scale(1.03);
+        }
+
+        .hero-link-projetos:hover i {
+            transform: translateX(4px);
         }
 
         /* Hero */
@@ -318,6 +390,16 @@
             font-weight: 400;
         }
 
+        .hero p .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.1em;
+            background: #a78bfa;
+            margin-left: 4px;
+            vertical-align: text-bottom;
+            animation: blink 0.8s step-end infinite;
+        }
+
         .hero-buttons {
             display: flex;
             flex-direction: column;
@@ -366,6 +448,20 @@
             border: 1px solid rgba(42, 35, 64, 0.5);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: glow-pulse 4s infinite;
+        }
+
+        .projeto-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.02), transparent 50%, rgba(167, 139, 250, 0.02));
+            pointer-events: none;
         }
 
         .projeto-card:hover {
@@ -392,6 +488,11 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .projeto-card:hover .thumb img {
+            transform: scale(1.05);
         }
 
         .projeto-card h4 {
@@ -407,7 +508,6 @@
             margin-bottom: 0.8rem;
         }
 
-        /* LINK ACESSAR SITE */
         .link-ver-projeto {
             font-size: 0.95rem;
             font-weight: 500;
@@ -415,7 +515,7 @@
             align-items: center;
             gap: 6px;
             transition: all 0.3s ease;
-            border-bottom: 2px solid rgba(124, 58, 237, 0.3);
+            border-bottom: 2px solid #a89bc2;
             padding-bottom: 2px;
             cursor: pointer;
             outline: none !important;
@@ -435,7 +535,7 @@
             text-decoration: none !important;
             outline: none !important;
             box-shadow: none !important;
-            border-bottom: 2px solid rgba(124, 58, 237, 0.3) !important;
+            border-bottom: 2px solid #a89bc2 !important;
             background-color: transparent !important;
         }
 
@@ -469,6 +569,23 @@
             transition: all 0.3s ease;
             font-weight: 500;
             color: #d4cce8;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .processo-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.05), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .processo-item:hover::before {
+            left: 100%;
         }
 
         .processo-item:hover {
@@ -510,6 +627,19 @@
             border-left-width: 6px;
             transition: all 0.3s ease;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .servico-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.02));
+            pointer-events: none;
         }
 
         .servico-item:hover {
@@ -546,6 +676,24 @@
             padding: 1.2rem 0.8rem;
             text-align: center;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .diferencial-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(124, 58, 237, 0.05), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .diferencial-item:hover::before {
+            opacity: 1;
         }
 
         .diferencial-item:hover {
@@ -562,6 +710,11 @@
             background-clip: text;
             margin-bottom: 0.5rem;
             display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .diferencial-item:hover i {
+            transform: scale(1.15) rotate(-5deg);
         }
 
         .diferencial-item span {
@@ -705,6 +858,21 @@
             user-select: none !important;
             -webkit-user-select: none !important;
             -webkit-tap-highlight-color: transparent !important;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contato-redes a::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .contato-redes a:hover::before {
+            opacity: 1;
         }
 
         .contato-redes a:focus,
@@ -732,6 +900,23 @@
             font-size: 0.9rem;
             border-top: 1px solid rgba(42, 35, 64, 0.5);
             padding-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-meta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.03), transparent 70%);
+            pointer-events: none;
+        }
+
+        .footer-meta:hover {
+            transform: perspective(600px) rotateY(0deg) rotateX(0deg);
         }
 
         .avatar-medium {
@@ -743,6 +928,11 @@
             border: 2px solid rgba(74, 58, 107, 0.5);
             box-shadow: 0 4px 16px rgba(124, 58, 237, 0.12);
             background: rgba(45, 31, 74, 0.5);
+            transition: transform 0.4s ease;
+        }
+
+        .avatar-medium:hover {
+            transform: scale(1.1) rotate(-5deg);
         }
 
         .avatar-medium img {
@@ -802,6 +992,7 @@
             .hero h1 { font-size: 2.8rem; }
             .hero-buttons { flex-direction: row; gap: 0.8rem; }
             .btn-primary { width: auto; min-width: 200px; max-width: none; }
+            .hero-link-projetos { width: auto; min-width: 200px; max-width: none; }
         }
 
         @media (min-width: 860px) {
@@ -824,6 +1015,7 @@
 
         @media (max-width: 480px) {
             .btn-primary { min-width: 160px; padding: 0.7rem 1.4rem; font-size: 0.85rem; max-width: 220px; }
+            .hero-link-projetos { min-width: 160px; padding: 0.7rem 1.4rem; font-size: 0.85rem; max-width: 220px; }
             .hero-buttons { gap: 0.5rem; }
             .hero h1 { font-size: 1.6rem; }
             .hero-avatar { width: 100px; height: 100px; }
@@ -840,14 +1032,16 @@
             .porque-item { padding: 1rem 1rem; }
             .whatsapp-float { width: 50px; height: 50px; font-size: 1.6rem; bottom: 20px; right: 20px; }
             h2 { font-size: 1.8rem; }
-            .hero-link-projetos { font-size: 0.9rem; }
         }
 
         .text-center { text-align: center; }
-        hr { border: 0; border-top: 1px solid rgba(42, 35, 64, 0.5); margin: 2rem 0 0.5rem 0; }
     </style>
 </head>
 <body>
+
+    <!-- PARTÍCULAS CANVAS -->
+    <canvas id="particles-canvas"></canvas>
+
     <div class="container">
 
         <!-- Hero -->
@@ -861,10 +1055,12 @@
                     <img src="vanley.png" alt="Vanley Basso">
                 </div>
                 <h1>Sites profissionais para empresas, eventos e profissionais.</h1>
-                <p>Landing pages e sites institucionais rápidos, modernos e responsivos.</p>
+                <p id="typing-text">Landing pages e sites institucionais rápidos, modernos e responsivos.<span class="typing-cursor"></span></p>
                 <div class="hero-buttons">
                     <a href="https://wa.me/5554996214447" target="_blank" class="btn-primary btn-orcamento" onclick="this.blur()"><i class="fab fa-whatsapp"></i> Solicitar orçamento</a>
-                    <a href="#projetos" class="hero-link-projetos" onclick="this.blur()">Ver projetos</a>
+                    <a href="#projetos" class="hero-link-projetos" onclick="this.blur()">
+                        <i class="fas fa-globe"></i> Ver projetos
+                    </a>
                 </div>
             </div>
         </section>
@@ -1090,7 +1286,7 @@
             </div>
         </div>
 
-        <!-- Footer com apenas uma linha -->
+        <!-- Footer -->
         <div class="footer-meta">
             <p>© <span id="anoAtual"></span> Vanley Basso · Sites que conectam pessoas.</p>
         </div>
@@ -1103,13 +1299,24 @@
     </a>
 
     <script>
+        // ============================================================
+        // 1. ANO ATUAL
+        // ============================================================
         document.getElementById('anoAtual').textContent = new Date().getFullYear();
 
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        // ============================================================
+        // 2. SCROLL PARA TOPO AO RECARREGAR
+        // ============================================================
+        window.scrollTo(0, 0);
+        if (window.location.hash) {
+            history.replaceState(null, null, window.location.pathname + window.location.search);
+        }
+        setTimeout(() => window.scrollTo(0, 0), 50);
 
+        // ============================================================
+        // 3. ANIMAÇÃO DE REVELAÇÃO
+        // ============================================================
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1117,10 +1324,184 @@
                 }
             });
         }, observerOptions);
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
+        // ============================================================
+        // 4. TYPING EFFECT NA FRASE DE BAIXO
+        // ============================================================
+        (function typingEffect() {
+            const pElement = document.getElementById('typing-text');
+            const originalText = 'Landing pages e sites institucionais rápidos, modernos e responsivos.';
+            let currentIndex = 0;
+            let isDeleting = false;
+            let speed = 55;
+
+            function type() {
+                if (!isDeleting) {
+                    if (currentIndex < originalText.length) {
+                        pElement.innerHTML = originalText.substring(0, currentIndex + 1) + '<span class="typing-cursor"></span>';
+                        currentIndex++;
+                        setTimeout(type, speed);
+                    } else {
+                        setTimeout(() => {
+                            isDeleting = true;
+                            setTimeout(type, 2000);
+                        }, 3000);
+                    }
+                } else {
+                    if (currentIndex > 0) {
+                        pElement.innerHTML = originalText.substring(0, currentIndex - 1) + '<span class="typing-cursor"></span>';
+                        currentIndex--;
+                        setTimeout(type, speed / 2);
+                    } else {
+                        isDeleting = false;
+                        setTimeout(type, 500);
+                    }
+                }
+            }
+
+            setTimeout(type, 600);
+        })();
+
+        // ============================================================
+        // 5. PARTÍCULAS SURREAIS (CANVAS)
+        // ============================================================
+        (function particles() {
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+            const PARTICLE_COUNT = 130;
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedX = (Math.random() - 0.5) * 0.5;
+                    this.speedY = (Math.random() - 0.5) * 0.5;
+                    this.opacity = Math.random() * 0.5 + 0.2;
+                    this.hue = 260 + Math.random() * 40;
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    if (this.x < 0 || this.x > width) this.speedX *= -1;
+                    if (this.y < 0 || this.y > height) this.speedY *= -1;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `hsla(${this.hue}, 80%, 70%, ${this.opacity})`;
+                    ctx.fill();
+                    ctx.shadowColor = `hsla(${this.hue}, 80%, 70%, 0.3)`;
+                    ctx.shadowBlur = 10;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+            }
+
+            function initParticles() {
+                particles = [];
+                for (let i = 0; i < PARTICLE_COUNT; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            function connectParticles() {
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 150) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(167, 139, 250, ${0.07 * (1 - dist / 150)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                connectParticles();
+                requestAnimationFrame(animate);
+            }
+
+            window.addEventListener('resize', () => {
+                resize();
+                initParticles();
+            });
+
+            resize();
+            initParticles();
+            animate();
+        })();
+
+        // ============================================================
+        // 6. PARALLAX 3D NO MOUSE (CARDS)
+        // ============================================================
+        (function parallax3D() {
+            const cards = document.querySelectorAll('.projeto-card, .card, .depoimento-item, .porque-item, .servico-item');
+
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+                    card.style.transform = `
+                        perspective(800px)
+                        rotateY(${x * 5}deg)
+                        rotateX(${-y * 5}deg)
+                        translateY(-4px)
+                        scale(1.02)
+                    `;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(800px) rotateY(0deg) rotateX(0deg) translateY(0) scale(1)';
+                });
+            });
+        })();
+
+        // ============================================================
+        // 7. EFEITO DE ONDA NO RODAPÉ
+        // ============================================================
+        (function waveFooter() {
+            const footer = document.querySelector('.footer-meta');
+            if (footer) {
+                footer.addEventListener('mousemove', (e) => {
+                    const rect = footer.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 15;
+                    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 8;
+                    footer.style.transform = `perspective(600px) rotateY(${x}deg) rotateX(${-y}deg)`;
+                });
+                footer.addEventListener('mouseleave', () => {
+                    footer.style.transform = 'perspective(600px) rotateY(0deg) rotateX(0deg)';
+                });
+            }
+        })();
+
+        console.log('🚀 SITE SURREAL ATIVADO!');
+        console.log('⭐ Partículas interativas');
+        console.log('⭐ Typing effect na frase secundária');
+        console.log('⭐ Parallax 3D nos cards');
     </script>
 </body>
 </html>
