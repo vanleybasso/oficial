@@ -1305,87 +1305,37 @@
         document.getElementById('anoAtual').textContent = new Date().getFullYear();
 
         // ============================================================
-        // 2. SCROLL PARA TOPO AO RECARREGAR (FORÇADO - MOBILE E DESKTOP)
+        // 2. SCROLL PARA TOPO AO RECARREGAR (FORÇADO)
         // ============================================================
-        (function forceScrollToTop() {
-            // Desativa o scroll restoration do navegador
-            if ('scrollRestoration' in history) {
-                history.scrollRestoration = 'manual';
-            }
+        // Remove qualquer hash da URL para evitar âncoras
+        if (window.location.hash) {
+            history.replaceState(null, null, window.location.pathname + window.location.search);
+        }
 
-            // Remove qualquer hash da URL para evitar âncoras
-            if (window.location.hash) {
-                history.replaceState(null, null, window.location.pathname + window.location.search);
-            }
+        // Força o scroll para o topo imediatamente
+        window.scrollTo(0, 0);
 
-            // Força o scroll para o topo imediatamente
+        // Força novamente após o DOM carregar completamente
+        document.addEventListener('DOMContentLoaded', function() {
             window.scrollTo(0, 0);
-            document.documentElement.scrollTop = 0;
-            document.body.scrollTop = 0;
+        });
 
-            // Força novamente após o DOM carregar
-            document.addEventListener('DOMContentLoaded', function() {
-                window.scrollTo(0, 0);
-                document.documentElement.scrollTop = 0;
-                document.body.scrollTop = 0;
-            });
+        // E mais uma vez após tudo carregar (imagens, etc)
+        window.addEventListener('load', function() {
+            window.scrollTo(0, 0);
+        });
 
-            // Força após tudo carregar (imagens, etc)
-            window.addEventListener('load', function() {
-                window.scrollTo(0, 0);
-                document.documentElement.scrollTop = 0;
-                document.body.scrollTop = 0;
-            });
-
-            // Força em intervalos para garantir (especialmente no mobile)
+        // Força o scroll para o topo com múltiplas tentativas
+        (function forceScrollToTop() {
             let attempts = 0;
-            const maxAttempts = 20;
+            const maxAttempts = 10;
             const interval = setInterval(() => {
                 window.scrollTo(0, 0);
-                document.documentElement.scrollTop = 0;
-                document.body.scrollTop = 0;
                 attempts++;
-                if (attempts >= maxAttempts || (window.scrollY === 0 && document.documentElement.scrollTop === 0)) {
+                if (attempts >= maxAttempts || window.scrollY === 0) {
                     clearInterval(interval);
                 }
             }, 50);
-
-            // Força novamente após 1 segundo (para mobile que pode ter atraso)
-            setTimeout(() => {
-                window.scrollTo(0, 0);
-                document.documentElement.scrollTop = 0;
-                document.body.scrollTop = 0;
-            }, 1000);
-
-            // Força novamente após 2 segundos
-            setTimeout(() => {
-                window.scrollTo(0, 0);
-                document.documentElement.scrollTop = 0;
-                document.body.scrollTop = 0;
-            }, 2000);
-
-            // Detecta toque e força scroll (para mobile)
-            document.addEventListener('touchstart', function() {
-                if (window.scrollY > 10 || document.documentElement.scrollTop > 10) {
-                    window.scrollTo(0, 0);
-                    document.documentElement.scrollTop = 0;
-                    document.body.scrollTop = 0;
-                }
-            }, { passive: true });
-
-            // Detecta scroll e força volta ao topo se estiver muito longe (nos primeiros segundos)
-            let scrollCheckCount = 0;
-            const scrollCheckInterval = setInterval(() => {
-                if (window.scrollY > 50 || document.documentElement.scrollTop > 50) {
-                    window.scrollTo(0, 0);
-                    document.documentElement.scrollTop = 0;
-                    document.body.scrollTop = 0;
-                }
-                scrollCheckCount++;
-                if (scrollCheckCount > 30) { // 30 * 100ms = 3 segundos
-                    clearInterval(scrollCheckInterval);
-                }
-            }, 100);
         })();
 
         // ============================================================
@@ -1577,7 +1527,7 @@
         console.log('⭐ Partículas interativas');
         console.log('⭐ Typing effect na frase secundária');
         console.log('⭐ Parallax 3D nos cards');
-        console.log('⭐ Scroll forçado para o topo (Desktop e Mobile)');
+        console.log('⭐ Scroll forçado para o topo ao recarregar');
     </script>
 </body>
 </html>
