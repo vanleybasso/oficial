@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Vanley Basso · Sites profissionais</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,6 +19,8 @@
 
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
         }
 
         body {
@@ -28,7 +30,10 @@
             line-height: 1.6;
             padding: 0 0 2rem 0;
             overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
             cursor: auto;
+            position: relative;
         }
 
         /* PARTÍCULAS - CANVAS */
@@ -40,6 +45,7 @@
             height: 100%;
             z-index: 0;
             pointer-events: none;
+            overflow: hidden;
         }
 
         /* RESET COMPLETO - FORÇA TODOS OS ESTADOS SEM MUDANÇA DE COR */
@@ -120,6 +126,8 @@
             padding: 0 22px;
             position: relative;
             z-index: 1;
+            overflow: hidden;
+            width: 100%;
         }
 
         /* Tipografia */
@@ -327,6 +335,7 @@
             padding: 1.5rem 0 1rem 0;
             text-align: center;
             position: relative;
+            overflow: hidden;
         }
 
         .hero::before {
@@ -1528,6 +1537,8 @@
         console.log('⭐ Typing effect na frase secundária');
         console.log('⭐ Parallax 3D nos cards');
         console.log('⭐ Scroll forçado para o topo ao recarregar');
+        console.log('⭐ Zoom bloqueado no mobile');
+        console.log('⭐ Scroll horizontal bloqueado');
     </script>
 </body>
 </html>
